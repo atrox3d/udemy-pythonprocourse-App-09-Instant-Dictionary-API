@@ -4,6 +4,7 @@ import json
 
 
 class Api:
+    path = '/api'
     """
     Handles requests at /api?w=word
     """
@@ -40,8 +41,3 @@ class Api:
         print(f'wp.html    | {wp.html}')
 
         return wp
-
-
-jp.Route('/', Api.serve)
-jp.Route('/api', Api.serve)
-jp.justpy()

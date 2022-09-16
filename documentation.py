@@ -7,7 +7,8 @@ class Doc:
     About is a concrete class of page.Page
     """
     path = '/'
-    example = api.Api.get_response('moon', indent=4)
+    example_text = api.Api.get_response('moon', indent=4)
+    example_url = f'http://{jp.HOST}:{jp.PORT}/api?w=moon'
 
     @classmethod
     def serve(cls, request):
@@ -19,9 +20,10 @@ class Doc:
         jp.Div(a=div, text='Instant Dictionary API', classes='text-4xl m-2')
         jp.Div(a=div, text='Get definition of words', classes='text-lg')
         jp.Hr(a=div)
-        jp.Div(a=div, text=f'http://{jp.HOST}:{jp.PORT}/api?w=moon')
+        # jp.Div(a=div, text=f'http://{jp.HOST}:{jp.PORT}/api?w=moon')
+        jp.A(a=div, text=cls.example_url, href=cls.example_url)
         jp.Hr(a=div)
-        jp.Pre(a=div, text=cls.example)
+        jp.Pre(a=div, text=cls.example_text, title=cls.example_text)
 
         return wp
 

@@ -8,6 +8,20 @@ class Api:
     """
     Handles requests at /api?w=word
     """
+
+    @classmethod
+    def get_response(cls, word, indent=None):
+        defined = definition.Definition(word).get()
+        print(f'?w         | {word}')
+        print(f'definition | {defined}')
+
+        response = {                                            # create dict for response
+            "word": word,
+            "definition": defined
+        }
+
+        return json.dumps(response, indent=indent)                             # converto to string and assing
+
     @classmethod
     def serve(cls, req):
         wp = jp.WebPage()                                       # create justpy webpage
@@ -23,21 +37,7 @@ class Api:
         """
         this other way assigns only the {word} string to wp.html
         """
-        # print(f'wp.html: {wp.html}')
-        # print(f'?w: {word}')
-        # wp.html = word
-        # print(f'wp.html: {wp.html}')
-
-        defined = definition.Definition(word).get()
-        print(f'?w         | {word}')
-        print(f'definition | {defined}')
-
-        response = {                                            # create dict for response
-            "word": word,
-            "definition": defined
-        }
-
-        wp.html = json.dumps(response)                          # converto to string and assing
+        wp.html = cls.get_response(word)                        # converto to string and assing
         print(f'wp.html    | {wp.html}')
 
         return wp

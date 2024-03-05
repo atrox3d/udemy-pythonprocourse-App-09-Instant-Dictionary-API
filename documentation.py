@@ -8,12 +8,12 @@ class Doc:
     """
     path = '/'
     example_text = api.Api.get_response('moon', indent=4)
-    example_url = f'http://{jp.HOST}:{jp.PORT}/api?w=moon'
+    example_url = f'http://{jp.jpconfig.HOST}:{jp.jpconfig.HOST}/api?w=moon'
 
     @classmethod
     def serve(cls, request):
         wp = jp.WebPage()
-        print(jp.HOST)
+        print(jp.jpconfig.HOST)
 
         div = jp.Div(a=wp, classes='bg-gray-200 h-screen')
 
